@@ -34,7 +34,8 @@
               : 'border-l-4 border-l-green-500',
             selectedInsurer?.name === insurer.name 
               ? 'ring-2 ring-blue-500 ring-offset-2' 
-              : ''
+              : '',
+            insurer.complete === false ? 'opacity-30 hover:opacity-50' : ''
           ]"
           @click="selectInsurer(insurer)"
         >
@@ -193,15 +194,16 @@
               </div>
               
               <!-- Status Indicator -->
-              <div v-if="isOverdue(insurer)" class="relative flex items-center">
+              <div v-if="isOverdue(insurer)" class="relative flex items-center mt-4 p-2 bg-red-50 rounded-lg">
                 <div class="absolute inset-0 bg-red-500 rounded-full opacity-75 animate-ping"></div>
                 <div class="relative w-4 h-4 bg-red-600 rounded-full"></div>
                 <span class="ml-2 text-xs font-medium text-red-600">
-                  +{{ getOverdueDays(insurer) }}d
+                  +{{ getOverdueDays(insurer) }} Tage überfällig
                 </span>
               </div>
-              <div v-else class="flex items-center">
+              <div v-else class="flex items-center mt-4 p-2 bg-green-50 rounded-lg">
                 <div class="w-4 h-4 bg-green-500 rounded-full"></div>
+                <span class="ml-2 text-xs font-medium text-green-600">Aktuell</span>
               </div>
             </div>
           </div>
